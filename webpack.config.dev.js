@@ -13,7 +13,8 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[contenthash].js',
-        assetModuleFilename: 'assets/images/[hash][ext][query]'
+        assetModuleFilename: 'assets/images/[hash][ext][query]',
+        publicPath: '/',
     },
     mode: 'development',
     devtool: 'source-map',
@@ -21,7 +22,13 @@ module.exports = {
         extensions: ['.js', '.jsx'],
         alias: {
             '@components': path.resolve(__dirname, 'src/components/'),
-            '@styles': path.resolve(__dirname, 'src/styles/')
+            '@styles': path.resolve(__dirname, 'src/styles/'),
+            '@images': path.resolve(__dirname , 'src/assets/images/'),
+            '@containers': path.resolve(__dirname, 'src/containers/'),
+            '@routes': path.resolve(__dirname, 'src/routes/'),
+            '@pages': path.resolve(__dirname, 'src/pages/'),
+            '@fonts': path.resolve(__dirname, 'src/assets/fonts/'),
+            '@hooks': path.resolve(__dirname, 'src/hooks/'),
         }
     },
     module: {  
@@ -30,7 +37,17 @@ module.exports = {
                 test: /\.(m?js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader'
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            [
+                                '@babel/preset-react',
+                                {
+                                    runtime: 'automatic' //import react from react wont be needed anymore
+                                }
+                            ]
+                            ]
+                        }
                 }
             },
             {
@@ -49,23 +66,19 @@ module.exports = {
                 ]
             },
             {
-                test: /\.png/,
-                type: 'asset/resource'
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: 'assets/images/[hash][ext][query]'
+                }
             },
             {
-                test: /\.(woff|woff2)$/,
-                use: {
-                    loader: 'url-loader',
-                    options: {
-                        limit: 10000,
-                        mimetype: "application/font-woff",
-                        name: "[name].[contenthash].[ext]",
-                        outputPath: "./assets/fonts/",
-                        publicPath: "../assets/fonts/",
-                        esModule: false,
-                    }
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: "asset/resource",
+                generator: {
+                    filename: 'assets/fonts/[hash][ext][query]'
                 }
-            }
+            },
         ]
     },
     plugins: [
@@ -97,9 +110,11 @@ module.exports = {
         ]
     }  */
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        compress: true,
         historyApiFallback: true,
-        port: 3006
+        static: {
+            directory: path.join(__dirname, 'dist'),
+          },
+        compress: true,
+        port: 3006,
     }
 }

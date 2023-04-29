@@ -1,6 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './components/App'
-import './styles/global.scss'
+import React from 'react';
+import { App } from '@routes/App';
+import { createRoot } from 'react-dom/client';
 
-ReactDOM.render(<App />, document.getElementById('app'))
+const rootElement = document.getElementById('app');
+const root = createRoot(rootElement); 
+root.render(<App tab="home" />);
