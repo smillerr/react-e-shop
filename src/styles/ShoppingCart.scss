@@ -1,0 +1,118 @@
+.my-shopping-cart{
+    width: 380px;
+    height: 490px;
+    right: 3rem;
+    top: 5rem;
+    position: absolute;
+    z-index: 2;
+    background-color: var(--white);
+    border: 1px solid var(--very-light-pink);
+    border-radius: 6px;
+}
+.nav-bar-shopping-cart{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.nav-bar-shopping-cart img{
+    width: 2rem;
+    height: 2rem;
+    rotate: 180deg;
+}
+.nav-bar-shopping-cart p{
+    color: var(--black);
+    font-size: var(--large);
+    font-weight: bold;
+}
+.shopping-cart-container{
+    width: 100%;
+    height: 460px;
+    padding: 1rem;
+}
+.shopping-cart-info{
+    background-color: var(--text-input-field);
+    border-radius: 1.2rem;
+    padding: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.6rem;
+    height: 5rem;
+}
+.shopping-cart-info p:nth-child(1){
+    display: flex;
+    align-items: center;
+    font-size: var(--small);
+    font-weight: bold;            
+}
+.shopping-cart-info p:nth-child(2){
+    display: flex;
+    align-items: center; 
+    font-size: var(--small);
+    font-weight: bold;         
+}
+.shopping-cart-products-container{
+    display: grid;
+    grid-template-rows: repeat(4, 7rem);
+    margin-bottom: 2rem;
+    height: 280px;
+    overflow-y: scroll;
+}
+.product-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.product-item p{
+    color: var(--black);
+    font-size: var(--small);
+    font-weight: bold;
+}
+.product-info{
+    display: flex;
+    align-items: center;
+}
+.product-info figure{
+    margin: 0;
+}
+.product-info figure img{ 
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 2rem;
+}
+.product-item .product-info  figure + p{
+    margin-left: 1.6rem;
+    color: var(--very-light-pink);
+    font-size: var(--small);
+    font-weight: 500;
+}
+.product-cancelled{
+    display: flex;
+    align-items: center;
+}
+.product-cancelled p{
+    display: flex;
+    align-items: center;
+}
+.product-cancelled figure{
+    height: 14px;
+    width: 14px;
+    margin-left: 2rem;
+}
+
+@media (max-width: 640px){
+    .my-shopping-cart{
+        width: 100%;
+        margin: 0;
+        padding-right: 1rem;
+        left: 1rem;
+    }
+    .shopping-cart-container{
+        width: 100%;
+        margin: 0;
+    }
+}
