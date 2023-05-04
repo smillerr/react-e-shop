@@ -10,7 +10,7 @@ function Home(){
         <>
             <NavBar />
             <ProductList />
-            {/* <ShoppingCart/> */}
+            <ShoppingCart/> 
             {/* <ProductDetailAside /> */}
             {/* <DesktopMenu /> */}
             {/* <MobileMenu /> */}

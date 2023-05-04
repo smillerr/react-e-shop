@@ -6,7 +6,6 @@ import addToCart from '@images/bt_add_to_cart.svg';
 function ProductInfo( { product , parent } ){
     const isChildrenOf = parent;
     const {addProductToCart} = useContext(AppContext);
-    const {appState} = useContext(AppContext);
     //This is our context, which contains the cart of the products that we have added to the cart, this is useful because when we want to render our shopping cart
     //Creating a product 
     if(isChildrenOf==="Product Detail"){
@@ -25,8 +24,6 @@ function ProductInfo( { product , parent } ){
 
         const handleCart = (item) => {
             addProductToCart(item);
-            console.log(item)
-            console.log(appState.cart)
         }
         return (
             <>

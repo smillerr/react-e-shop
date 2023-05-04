@@ -32,6 +32,11 @@
     --desktop-card-height: 30rem;
     --mobile-card-height: 28rem;
 }
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 html{
     font-size: 62.5%;
 }

@@ -1,16 +1,19 @@
 import closeIcon from '@images/icon_close.png';
-function ShoppingCartItem({ name , price , image}){
+
+import '@styles/ShoppingCartItem.scss';
+
+function ShoppingCartItem({ product, removeProductFromCart}){
     return (
         <div className="product-item">
             <div className="product-info">
                 <figure>
-                    <img src={image} alt="Product in shopping cart"/>
+                    <img src={product.images[0]} alt="Product in shopping cart"/>
                 </figure>
-                <p> {name} </p>
+                <p> {product.title} </p>
             </div>
             <div className="product-cancelled">
-                <p className="shopping-cart-product-price"> {price} </p>
-                <figure className="remove-from-shopping-cart">
+                <p className="shopping-cart-product-price"> {`$${product.price}.00`} </p>
+                <figure className="remove-from-shopping-cart" onClick={() => removeProductFromCart(product)}>
                     <img src={closeIcon} alt="Remove product from cart icon"/>
                 </figure>
             </div>

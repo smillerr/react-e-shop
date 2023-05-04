@@ -15,7 +15,15 @@ function useInitialState(){
         });
     };
 
-    return {appState , addProductToCart}
+    const removeProductFromCart = (payload) =>{
+		const newCart = appState.cart.filter(product => product != payload);
+		setAppState({
+			...appState,
+			cart: [...newCart]
+		});
+	}
+
+    return {appState , addProductToCart, removeProductFromCart}
 }
 
 export {useInitialState};
