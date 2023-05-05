@@ -8,44 +8,55 @@ import flechita from '@images/flechita.svg';
 function ShoppingCart(){
     const {appState} = useContext(AppContext);
     const {removeProductFromCart} = useContext(AppContext);
+    const {closeShoppingCart} = useContext(AppContext);
 
     const handleRemove = (item) =>{
         removeProductFromCart(item);
     }
+    const handleClose = () => {
+        closeShoppingCart();
+    }
     return (
-        <aside className="my-shopping-cart inactive"> 
-            <nav className="nav-bar-shopping-cart"> 
-                <img src={flechita} alt="Menu" />
-                <div>
-                    <p> Shopping Cart </p>
+        <>
+        {appState.isCartOpen ? 
+            <aside className="my-shopping-cart"> 
+                <nav className="nav-bar-shopping-cart"> 
+                    <img src={flechita} alt="Close cart icon" onClick={handleClose} />
+                    <div>
+                        <p> Shopping Cart </p>
+                    </div>
+                </nav>
+                <div className="shopping-cart-container">
+                    <div className="shopping-cart-products-container">
+                        {/* Here goes our product of our shopping cart */}
+                        {appState.cart.map((product , index) => {
+                        return <ShoppingCartItem product={product} removeProductFromCart={handleRemove} key={`cartItem-${index}-${product.id}`} index={index}/>;
+                        })}
+                    </div>
+                    <div className="shopping-cart-info">
+                        {
+                            appState.cart.length==0 ? 
+                            <p id="shopping-cart-info-description">  Your car is empty
+                            </p>
+                            :
+                            <>
+                            <p id="shopping-cart-info-description">  Total
+                            </p>
+                            <p id="total-value"> 
+                            {calculateTotal(appState.cart)}
+                            </p>
+                            </>
+                            
+                        }
+                    </div>
+                    <button className="primary-button checkout-button"> Checkout </button>
                 </div>
-            </nav>
-            <div className="shopping-cart-container">
-                <div className="shopping-cart-products-container">
-                    {/* Here goes our product of our shopping cart */}
-                    {appState.cart.map(product => {
-                    return <ShoppingCartItem product={product} removeProductFromCart={handleRemove} />;
-                    })}
-                </div>
-                <div className="shopping-cart-info">
-                    {
-                        appState.cart.length==0 ? 
-                        <p id="shopping-cart-info-description">  Your car is empty
-                        </p>
-                        :
-                        <>
-                        <p id="shopping-cart-info-description">  Total
-                        </p>
-                        <p id="total-value"> 
-                        {calculateTotal(appState.cart)}
-                        </p>
-                        </>
-                        
-                    }
-                </div>
-                <button className="primary-button checkout-button"> Checkout </button>
-            </div>
-        </aside>
+            </aside>
+            :
+            null
+        }
+            
+        </>
     );
 }
 

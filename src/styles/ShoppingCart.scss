@@ -9,6 +9,9 @@
     border: 1px solid var(--very-light-pink);
     border-radius: 6px;
 }
+.my-shopping-cart::-webkit-scrollbar{
+    display: none;
+}
 .nav-bar-shopping-cart{
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -22,6 +25,7 @@
     width: 2rem;
     height: 2rem;
     rotate: 180deg;
+    cursor: pointer;
 }
 .nav-bar-shopping-cart p{
     color: var(--black);
