@@ -8,17 +8,22 @@ import { DesktopMenu } from '@containers/DesktopMenu';
 import { MobileMenu } from '@containers/MobileMenu';
 import { useState , useContext } from 'react';
 import { AppContext } from '../context/AppContext';
+
+
 function NavBar(){
     const {appState} = useContext(AppContext);
     const {openShoppingCart} = useContext(AppContext);
     const {closeShoppingCart} = useContext(AppContext);
+    const {closeAside} = useContext(AppContext);
 
     const isCarEmpty = appState.cart.length;
     //Desktop Menu state
     const [toggleMenuDesktop , setToggleMenuDesktop] = useState(false);
     //Mobile Menu state
     const [toggleMenuMobile , setToggleMenuMobile] = useState(false);
+
     const handleOpenCart = () => {
+        closeAside();
         openShoppingCart();
         setToggleMenuDesktop(false);
         setToggleMenuMobile(false);
@@ -58,7 +63,7 @@ function NavBar(){
                     someUser@example.com 
                     </li>
                     <li className="nav-bar-cart"> 
-                        <img src={isCarEmpty==0 ? shoppingCartIcon : shoppingCartFilled}alt="Cart notification" id="nav-bar-cart-icon" onClick={handleOpenCart} />
+                        <img src={isCarEmpty==0 ? shoppingCartIcon : shoppingCartFilled} alt="Cart notification" id="nav-bar-cart-icon" onClick={handleOpenCart} />
                     </li> 
                 </ul>
             </div>

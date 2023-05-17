@@ -6,9 +6,8 @@ import '@styles/ShoppingCart.scss';
 import flechita from '@images/flechita.svg';
 
 function ShoppingCart(){
-    const {appState} = useContext(AppContext);
-    const {removeProductFromCart} = useContext(AppContext);
-    const {closeShoppingCart} = useContext(AppContext);
+    const {appState, removeProductFromCart, closeShoppingCart} = useContext(AppContext);
+
 
     const handleRemove = (item) =>{
         removeProductFromCart(item);
@@ -16,6 +15,7 @@ function ShoppingCart(){
     const handleClose = () => {
         closeShoppingCart();
     }
+
     return (
         <>
         {appState.isCartOpen ? 

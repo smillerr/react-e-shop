@@ -3,6 +3,6 @@ const calculateTotal = (products) => {
     for(let product of products){
         totalValue=totalValue+product.price;
     }
-    return `$${totalValue}.00`;
+    return `$${Math.ceil(totalValue)}`;
 }
 export default calculateTotal;
