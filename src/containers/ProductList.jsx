@@ -2,12 +2,15 @@ import '@styles/ProductList.scss';
 import { useGetProducts } from '@hooks/useGetProducts';
 import { ProductCard } from "./ProductCard";
 import { ProductDetailAside } from './ProductDetailAside';
+import { useContext, useState } from 'react';
+import { AppContext } from '../context/AppContext';
 
 
-const API='https://api.escuelajs.co/api/v1/products';
+
 
 function ProductList( {} ){
-    const products = useGetProducts(API);
+    const {filteredUrl} = useContext(AppContext);
+    const products = useGetProducts(filteredUrl);
     return(
         <section className="ProductListContainer">
             <div className="ProductList">

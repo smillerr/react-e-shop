@@ -49,12 +49,12 @@ function NavBar(){
                     <img src={logo} alt="Yard sale logo" />
                 </div>
                 <ul> 
-                    <FilterCategory category="All" />
-                    <FilterCategory category="Clothes" />
-                    <FilterCategory category="Electronics" />
-                    <FilterCategory category="Furniture" />
-                    <FilterCategory category="Toys" />
-                    <FilterCategory category="Others" />
+                    <FilterCategory categoryName="All" categoryID={0} />
+                    <FilterCategory categoryName="Electronics" categoryID={1} />
+                    <FilterCategory categoryName="Clothes" categoryID={2} />
+                    <FilterCategory categoryName="Furniture" categoryID={3} />
+                    <FilterCategory categoryName="Toys" categoryID={4} />
+                    <FilterCategory categoryName="Others" categoryID={5} />
                 </ul>
             </div>
             <div className="navbar-right">

@@ -4,6 +4,7 @@ const initialState = {
     cart: [],
     isCartOpen: false,
     isAsideOpen: false,
+    filterCategoryID: 0,
 }
 
 
@@ -12,6 +13,7 @@ function useInitialState(){
     //Initial state of the app
     const [appState, setAppState] = useState(initialState);
     const [productToShow, setProductToShow] = useState({})
+    const [filteredUrl, setFilteredUrl] = useState(`https://api.escuelajs.co/api/v1/products`);
     
     const addProductToCart = (payload) => {
         setAppState({
@@ -60,8 +62,22 @@ function useInitialState(){
         })
     }
 
+    const filterByCategory = (categoryID) =>{
+        if(categoryID!==0){
+            setAppState({
+                ...appState,
+                filterCategoryID: categoryID,
+            })
+            setFilteredUrl(`https://api.escuelajs.co/api/v1/products/?categoryId=${categoryID}`);
+        }
+        else{
+            setFilteredUrl(`https://api.escuelajs.co/api/v1/products`);
+        }
+        console.log(categoryID);
+    }
 
-    return {appState , productToShow, addProductToCart, removeProductFromCart, openShoppingCart, closeShoppingCart, openAside, showProduct, closeAside}
+
+    return {appState , productToShow, filteredUrl, addProductToCart, removeProductFromCart, openShoppingCart, closeShoppingCart, openAside, showProduct, closeAside, filterByCategory}
 }
 
 export {useInitialState};
