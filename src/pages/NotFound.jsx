@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import '@styles/NotFound.scss';
 import notFound from '@images/404_not_found.svg';
 import logo from '@images/logo_yard_sale.svg';
@@ -15,7 +16,9 @@ function NotFound(){
                 <p className="subtitle">
                 The page that you are looking for doesn't exist or another error ocurred
                 </p>
-                <PrimaryButton text="Go back" />
+                <Link className="link" to="/">
+                    <PrimaryButton text="Return to home"/>
+                </Link>
             </div>
         </div>
     );

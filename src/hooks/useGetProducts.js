@@ -7,6 +7,7 @@ function useGetProducts(urlAPI){
 
     useEffect(() => {
         async function fetchData(){
+            console.log("Fetching data...");
             const response = await axios(urlAPI);
             setProducts(response.data);
         }
