@@ -15,6 +15,8 @@ import { NotFound } from '@pages/NotFound';
 import { AppContext } from '../context/AppContext';
 //Hooks
 import { useInitialState } from '../hooks/useInitialState';
+import MyOrders from '../pages/MyOrders';
+import MyOrderContent from '../components/MyOrderContent';
 
 function App(){
     const appInitialState = useInitialState();
@@ -27,6 +29,8 @@ function App(){
                     <Route exact path='/login' element={ <Login /> } />
                     <Route exact path='/recovery-password' element={ <RecoveryPwd />}/>
                     <Route exact path='/new-password' element={ <SetNewPwd /> }/> {/*A single route that represents a part of our applicattion, for example the form 'Forgot my password'*/}
+                    <Route exact path='/my-orders' element={ <MyOrders /> }/>
+                    <Route exact path='/my-orders/:orderIndex' element={<MyOrderContent/>}/> {/*A single route that represents a part of our applicattion, for example the form 'Forgot my password'*/}
                     <Route path='*' element={ <NotFound /> }/>    
                 </Routes>
             </Layout>

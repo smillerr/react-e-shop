@@ -45,3 +45,18 @@ body{
     font-family: 'Quicksand', Georgia, 'Times New Roman', Times, serif;
     margin: 0;
 }
+.main-container{
+    height: calc(100vh - 5rem);
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+.grid-container{
+    display: grid;
+    grid-template-rows: repeat(4, 7rem);
+    margin-bottom: 2rem;
+    width: 380px;
+    height: 280px;
+    overflow-y: scroll;
+    gap: 1rem 0
+}
