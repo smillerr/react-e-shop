@@ -7,7 +7,7 @@ function Home(){
         <>
             <NavBar isHome />
             <ProductList />
-            <ShoppingCart/>
+            <ShoppingCart/> 
             {/* <ProductDetailAside /> */}
             {/* <DesktopMenu /> */}
             {/* <MobileMenu /> */}
