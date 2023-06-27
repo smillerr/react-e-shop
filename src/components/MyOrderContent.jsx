@@ -1,8 +1,9 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { NavBar } from "./NavBar";
-
+import flechita from "@images/flechita.svg";
 const MyOrderContent = () => {
   let { orderIndex } = useParams();
   const { orders } = useContext(AppContext);
@@ -11,6 +12,18 @@ const MyOrderContent = () => {
     <>
     <NavBar/>
     <div className="main-container">
+      <div className="order-content-container" style={{
+        display: "flex",
+        flexDirection: "column"
+      }}>
+      <div className="order-header" style={{display: 'flex', alignItems:'center'}}>
+        <Link style={{marginRight: '3rem'}} to={"/my-orders"}>
+          <figure>
+            <img alt="Go back arrow" src={flechita} style={{transform: 'rotate(180deg)',}}/>
+          </figure>
+        </Link>
+        <h1> Order </h1>
+      </div>
       <div className="grid-container">
         {orderToRender?.products?.map((product) => (
           <div className="product-item" key={product.id}>
@@ -25,6 +38,7 @@ const MyOrderContent = () => {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </div>
     </>
