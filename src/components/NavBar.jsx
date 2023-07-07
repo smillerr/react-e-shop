@@ -9,6 +9,7 @@ import { MobileMenu } from "@containers/MobileMenu";
 import { useState, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { Link } from "react-router-dom";
+import SingInButton from "./SignInButton";
 
 function NavBar({ isHome }) {
   const { appState } = useContext(AppContext);
@@ -21,7 +22,7 @@ function NavBar({ isHome }) {
   const [toggleMenuDesktop, setToggleMenuDesktop] = useState(false);
   //Mobile Menu state
   const [toggleMenuMobile, setToggleMenuMobile] = useState(false);
-
+  const isLogged = true;
   const handleOpenCart = () => {
     closeAside();
     openShoppingCart();
@@ -48,7 +49,13 @@ function NavBar({ isHome }) {
         alt="Menu"
         onClick={handleToggleMenuMobile}
       />
-      {toggleMenuMobile ? isHome ? <MobileMenu isHome /> : <MobileMenu/> : null}
+      {toggleMenuMobile ? (
+        isHome ? (
+          <MobileMenu isHome />
+        ) : (
+          <MobileMenu />
+        )
+      ) : null}
       <div className="navbar-left">
         <div>
           <Link to={"/"}>
@@ -59,7 +66,7 @@ function NavBar({ isHome }) {
             />
           </Link>
         </div>
-        {isHome && 
+        {isHome && (
           <ul>
             <FilterCategory categoryName="All" categoryID={0} />
             <FilterCategory categoryName="Electronics" categoryID={1} />
@@ -68,14 +75,19 @@ function NavBar({ isHome }) {
             <FilterCategory categoryName="Toys" categoryID={4} />
             <FilterCategory categoryName="Others" categoryID={5} />
           </ul>
-        }
+        )}
       </div>
       <div className="navbar-right">
         <ul>
-          <li className="nav-bar-email" onClick={handleToggleMenuDesktop}>
-            someUser@example.com
-          </li>
-          {isHome && 
+          {isLogged ? (
+            <SingInButton />
+          ) : (
+            <li className="nav-bar-email" onClick={handleToggleMenuDesktop}>
+              someUser@example.com
+            </li>
+          )}
+
+          {isHome && (
             <li className="nav-bar-cart">
               <img
                 src={isCarEmpty == 0 ? shoppingCartIcon : shoppingCartFilled}
@@ -84,7 +96,7 @@ function NavBar({ isHome }) {
                 onClick={handleOpenCart}
               />
             </li>
-          }
+          )}
         </ul>
       </div>
       {toggleMenuDesktop ? <DesktopMenu /> : null}
