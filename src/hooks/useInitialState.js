@@ -8,7 +8,28 @@ const initialState = {
   filterCategoryID: 0,
   order: {},
 };
-
+const initialUserLS = () => {
+  const userInLocalStorage = localStorage.getItem("user");
+  let parsedUser;
+  if (!userInLocalStorage) {
+    localStorage.setItem("user", JSON.stringify({}));
+    parsedUser = {};
+  } else {
+    parsedUser = JSON.parse(userInLocalStorage);
+  }
+  return parsedUser;
+};
+const initalLoginStatusLS = () => {
+  const isLoggedInLocalStorage = localStorage.getItem("isLogged");
+  let parsedLogged;
+  if (!isLoggedInLocalStorage) {
+    localStorage.setItem("isLogged", JSON.stringify(false));
+    parsedLogged = false;
+  } else {
+    parsedLogged = JSON.parse(isLoggedInLocalStorage);
+  }
+  return parsedLogged;
+};
 //Custom hook to handle our inital state
 function useInitialState() {
   //Initial state of the app
@@ -18,7 +39,8 @@ function useInitialState() {
     `https://api.escuelajs.co/api/v1/products`
   );
   const [orders, setOrders] = useState([]);
-
+  const [user, setUser] = useState(initialUserLS);
+  const [isLogged, setIsLogged] = useState(initalLoginStatusLS);
   const addProductToCart = (payload) => {
     setAppState({
       ...appState,
@@ -100,6 +122,8 @@ function useInitialState() {
     productToShow,
     filteredUrl,
     orders,
+    user,
+    isLogged,
     addProductToCart,
     removeProductFromCart,
     clearShoppingCart,
@@ -111,6 +135,8 @@ function useInitialState() {
     filterByCategory,
     newOrder,
     newOrderInList,
+    setUser,
+    setIsLogged,
   };
 }
 

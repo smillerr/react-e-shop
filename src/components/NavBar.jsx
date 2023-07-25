@@ -10,19 +10,18 @@ import { useState, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { Link } from "react-router-dom";
 import SingInButton from "./SignInButton";
-
 function NavBar({ isHome }) {
   const { appState } = useContext(AppContext);
   const { openShoppingCart } = useContext(AppContext);
   const { closeShoppingCart } = useContext(AppContext);
   const { closeAside } = useContext(AppContext);
-
+  const { isLogged, setIsLogged } = useContext(AppContext);
+  const { user } = useContext(AppContext);
   const isCarEmpty = appState.cart.length;
   //Desktop Menu state
   const [toggleMenuDesktop, setToggleMenuDesktop] = useState(false);
   //Mobile Menu state
   const [toggleMenuMobile, setToggleMenuMobile] = useState(false);
-  const isLogged = true;
   const handleOpenCart = () => {
     closeAside();
     openShoppingCart();
@@ -40,6 +39,11 @@ function NavBar({ isHome }) {
     closeShoppingCart();
     setToggleMenuMobile(false);
     setToggleMenuDesktop(!toggleMenuDesktop);
+  };
+  const handleSignIn = () => {
+    const stringifiedLogIn = JSON.stringify(true);
+    localStorage.setItem("isLogged", stringifiedLogIn);
+    setIsLogged(true);
   };
   return (
     <nav className="main-navbar">
@@ -79,11 +83,11 @@ function NavBar({ isHome }) {
       </div>
       <div className="navbar-right">
         <ul>
-          {isLogged ? (
-            <SingInButton />
+          {!isLogged ? (
+            <SingInButton handleSignIn={handleSignIn} />
           ) : (
             <li className="nav-bar-email" onClick={handleToggleMenuDesktop}>
-              someUser@example.com
+              {user.email}
             </li>
           )}
 

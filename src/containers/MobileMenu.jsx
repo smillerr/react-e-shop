@@ -1,7 +1,17 @@
 import { FilterCategory } from "@components/FilterCategory";
 import "@styles/MobileMenu.scss";
 import MyOrdersLink from "../components/MyOrdersLink";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+import SignInButton from "../components/SignInButton";
 function MobileMenu({ isHome }) {
+  const { setIsLogged } = useContext(AppContext);
+  const handleSignIn = () => {
+    const stringifiedLogIn = JSON.stringify(true);
+    localStorage.setItem("isLogged", stringifiedLogIn);
+    setIsLogged(true);
+  };
+  const { isLogged } = useContext(AppContext);
   return (
     <div className="MobileMenu inactive">
       {isHome && (
@@ -31,15 +41,24 @@ function MobileMenu({ isHome }) {
       </div>
       <div className="my-info">
         <ul className="primary-list">
-          <li className="categories-item">
-            <a href="/"> example@somedomain.com </a>
-          </li>
-          <li className="categories-item">
-            <a href="/" id="sign-out">
-              {" "}
-              Sign out{" "}
-            </a>
-          </li>
+          {!isLogged ? (
+            <>
+            <p> Yoooo what up </p>
+            <SignInButton handleSignIn={handleSignIn} />
+            </>
+          ) : (
+            <>
+              <li className="categories-item">
+                <a href="/"> example@somedomain.com </a>
+              </li>
+              <li className="categories-item">
+                <a href="/" id="sign-out">
+                  {" "}
+                  Sign out{" "}
+                </a>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>
