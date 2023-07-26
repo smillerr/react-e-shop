@@ -23,16 +23,16 @@ import { AppContext } from "../context/AppContext";
 import { useInitialState } from "../hooks/useInitialState";
 import MyOrders from "../pages/MyOrders";
 import MyOrderContent from "../components/MyOrderContent";
+import MyAccount from "../pages/MyAccount";
 
 function App() {
   const appInitialState = useInitialState();
   const routesVisibility = () => {
-    const { isLogged, user } = useContext(AppContext);
     if (
-      isLogged &&
-      user !== {} &&
+      appInitialState.isLogged &&
+      appInitialState.user !== {} &&
       localStorage.getItem("user") !== {} &&
-      localStorage.getItem("isLogged") === true
+      localStorage.getItem("isLogged")
     ) {
       return true;
     } else {
@@ -56,6 +56,16 @@ function App() {
             <Route path="/recovery-password" element={<RecoveryPwd />} />
             <Route path="/new-password" element={<SetNewPwd />} />{" "}
             {/*A single route that represents a part of our applicattion, for example the form 'Forgot my password'*/}
+            <Route
+              path="/my-account"
+              element={
+                userAccessAllowed ? (
+                  <MyAccount />
+                ) : (
+                  <Navigate replace to={"/login"} />
+                )
+              }
+            />{" "}
             <Route
               path="/my-orders"
               element={
