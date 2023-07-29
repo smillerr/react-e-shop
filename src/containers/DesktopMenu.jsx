@@ -2,6 +2,7 @@ import "@styles/DesktopMenu.scss";
 import MyOrdersLink from "../components/MyOrdersLink";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
+import { Link } from "react-router-dom";
 function DesktopMenu() {
   const { setIsLogged, setUser } = useContext(AppContext);
   const handleLogOut = () => {
@@ -19,14 +20,14 @@ function DesktopMenu() {
           <li>My orders</li>
         </MyOrdersLink>
         <li>
-          <a href="/my-account" className="MyAccount">
+          <Link to="/my-account" className="MyAccount">
             My account
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="/" onClick={handleLogOut}>
+          <Link to="/" onClick={handleLogOut}>
             Sign out
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
