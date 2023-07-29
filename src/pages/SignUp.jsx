@@ -1,33 +1,30 @@
-import { useContext, useRef, useState } from "react";
-import "@styles/Login.scss";
-import { SecondaryButton } from "@components/SecondaryButton";
-import { ShopLogo } from "@components/ShopLogo";
-import { Link, Router, useNavigate } from "react-router-dom";
-import { AppContext } from "../context/AppContext";
 import {
+  Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Button,
 } from "@mui/material";
-
-function Login() {
+import React, { useState } from "react";
+import { useContext, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { SecondaryButton } from "@components/SecondaryButton";
+import { ShopLogo } from "@components/ShopLogo";
+import { AppContext } from "../context/AppContext";
+const SignUp = () => {
   const form = useRef(null);
   const router = useNavigate();
-  const { setUser, setIsLogged } = useContext(AppContext);
+  const { setUser } = useContext(AppContext);
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(form.current);
     const data = {
+      name: formData.get("name"),
       email: formData.get("email"),
       password: formData.get("password"),
     };
     setUser(data);
-    const stringifiedLogIn = JSON.stringify(true);
-    localStorage.setItem("isLogged", stringifiedLogIn);
-    setIsLogged(true);
     const stringifiedUser = JSON.stringify(data);
     localStorage.setItem("user", stringifiedUser);
     router("/");
@@ -46,7 +43,7 @@ function Login() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Login form information"}
+          {"Sign up form information"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -62,6 +59,17 @@ function Login() {
       <div className="Login-container">
         <ShopLogo />
         <form onSubmit={handleSubmit} className="login-form" ref={form}>
+          <label htmlFor="name" className="email">
+            {" "}
+            Your name{" "}
+          </label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Sebastian Miller"
+            className="input input-email"
+            required
+          />
           <label htmlFor="email" className="email">
             {" "}
             Email address{" "}
@@ -87,18 +95,12 @@ function Login() {
           <input
             type="submit"
             className="primary-button logIn-button"
-            value="Log in"
+            value="Sign Up"
           />
-          <a href="/recovery-password" className="forgot-password">
-            Forgot my password
-          </a>
         </form>
-        <Link to="/sign-up">
-          <SecondaryButton text="Sign up" />
-        </Link>
       </div>
     </div>
   );
-}
+};
 
-export { Login };
+export default SignUp;

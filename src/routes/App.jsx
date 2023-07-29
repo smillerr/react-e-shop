@@ -24,6 +24,7 @@ import { useInitialState } from "../hooks/useInitialState";
 import MyOrders from "../pages/MyOrders";
 import MyOrderContent from "../components/MyOrderContent";
 import MyAccount from "../pages/MyAccount";
+import SignUp from "../pages/SignUp";
 
 function App() {
   const appInitialState = useInitialState();
@@ -52,6 +53,7 @@ function App() {
             {" "}
             {/*This is for every single one of our routes that we will be using throught the app*/}
             <Route path="/" element={<Home />} />
+            <Route path="/sign-up" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/recovery-password" element={<RecoveryPwd />} />
             <Route path="/new-password" element={<SetNewPwd />} />{" "}
