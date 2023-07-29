@@ -1,15 +1,25 @@
 import "@styles/MyAccount.scss";
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { NavBar } from "../components/NavBar";
+import editAccountReducer from "../utils/editAccountReducer";
 function MyAccount() {
-  const { user } = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext);
   const [showPassword, setShowPassword] = useState(false);
   const [editStatus, setEditStatus] = useState(false);
+  const [editedUser, dispatch] = useReducer(editAccountReducer, user);
   const handleSubmit = (e) => {
+    console.log(editStatus);
     e.preventDefault();
+    if (editStatus) {
+      setUser(editedUser);
+      const stringifiedEditedUser = JSON.stringify(editedUser);
+      localStorage.setItem("user", stringifiedEditedUser);
+    }
+    setEditStatus(!editStatus);
   };
+
   return (
     <>
       <NavBar />
@@ -27,8 +37,14 @@ function MyAccount() {
                 id="name"
                 placeholder="Your name here"
                 className="input input-name"
-                value={user.name ? user.name : ""}
+                value={editedUser.name ? editedUser.name : ""}
                 disabled={editStatus ? false : true}
+                onChange={(e) =>
+                  dispatch({
+                    type: "NAME_CHANGED",
+                    editedName: e.target.value,
+                  })
+                }
               />
               <label htmlFor="email" className="email">
                 {" "}
@@ -39,8 +55,14 @@ function MyAccount() {
                 id="email"
                 placeholder="someone@example.com"
                 className="input input-email"
-                value={user.email}
+                value={editedUser.email}
                 disabled={editStatus ? false : true}
+                onChange={(e) =>
+                  dispatch({
+                    type: "EMAIL_CHANGED",
+                    editedEmail: e.target.value,
+                  })
+                }
                 required
               />
               <label htmlFor="password" className="password">
@@ -52,15 +74,20 @@ function MyAccount() {
                 id="password"
                 placeholder="*********"
                 className="input input-password"
-                value={user.password}
+                value={editedUser.password}
                 disabled={editStatus ? false : true}
+                onChange={(e) =>
+                  dispatch({
+                    type: "PASSWORD_CHANGED",
+                    editedPwd: e.target.value,
+                  })
+                }
               />
             </div>
             <input
               type="submit"
               className="primary-button edit-button"
               value={editStatus ? "Save changes" : "Edit"}
-              onClick={() => setEditStatus(!editStatus)}
             />
           </form>
         </div>
