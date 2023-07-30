@@ -1,11 +1,10 @@
-import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { ShoppingCartItem } from "@components/ShoppingCartItem";
 import calculateTotal from "../utils/calculateTotal";
 import "@styles/ShoppingCart.scss";
 import flechita from "@images/flechita.svg";
-import MyOrdersLink from "../components/MyOrdersLink";
+import { useNavigate } from "react-router-dom";
 
 function ShoppingCart() {
   const {
@@ -16,6 +15,7 @@ function ShoppingCart() {
     newOrder,
     newOrderInList,
   } = useContext(AppContext);
+  const router = useNavigate();
   const handleRemove = (item) => {
     removeProductFromCart(item);
   };
@@ -33,6 +33,7 @@ function ShoppingCart() {
       newOrder(orderToAdd);
       closeShoppingCart();
       clearShoppingCart();
+      router("/my-orders");
     }
   };
   return (
@@ -72,16 +73,15 @@ function ShoppingCart() {
                 </>
               )}
             </div>
-            <MyOrdersLink>
-              <button
-                type="button"
-                className="primary-button checkout-button"
-                onClick={() => handleCheckout(appState.cart)}
-              >
-                {" "}
-                Checkout{" "}
-              </button>
-            </MyOrdersLink>
+
+            <button
+              type="button"
+              className="primary-button checkout-button"
+              onClick={() => handleCheckout(appState.cart)}
+            >
+              {" "}
+              Checkout{" "}
+            </button>
           </div>
         </aside>
       ) : null}
