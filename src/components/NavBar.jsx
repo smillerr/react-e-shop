@@ -55,9 +55,16 @@ function NavBar({ isHome }) {
       />
       {toggleMenuMobile ? (
         isHome ? (
-          <MobileMenu isHome />
+          <MobileMenu
+            isHome
+            toggleMenuMobile={toggleMenuMobile}
+            setToggleMenuMobile={setToggleMenuMobile}
+          />
         ) : (
-          <MobileMenu />
+          <MobileMenu
+            toggleMenuMobile={toggleMenuMobile}
+            setToggleMenuMobile={setToggleMenuMobile}
+          />
         )
       ) : null}
       <div className="navbar-left">
@@ -84,7 +91,7 @@ function NavBar({ isHome }) {
       <div className="navbar-right">
         <ul>
           {!isLogged ? (
-            <SingInButton handleSignIn={handleSignIn} />
+            <SingInButton invisible handleSignIn={handleSignIn} />
           ) : (
             <li className="nav-bar-email" onClick={handleToggleMenuDesktop}>
               {user.email}
@@ -103,7 +110,12 @@ function NavBar({ isHome }) {
           )}
         </ul>
       </div>
-      {toggleMenuDesktop ? <DesktopMenu /> : null}
+      {toggleMenuDesktop ? (
+        <DesktopMenu
+          toggleMenuDesktop={toggleMenuDesktop}
+          setToggleMenuDesktop={setToggleMenuDesktop}
+        />
+      ) : null}
     </nav>
   );
 }

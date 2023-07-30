@@ -3,7 +3,7 @@ import MyOrdersLink from "../components/MyOrdersLink";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { Link } from "react-router-dom";
-function DesktopMenu() {
+function DesktopMenu({ toggleMenuDesktop, setToggleMenuDesktop }) {
   const { setIsLogged, setUser } = useContext(AppContext);
   const handleLogOut = () => {
     const stringifiedNoUser = JSON.stringify({});
@@ -12,6 +12,7 @@ function DesktopMenu() {
     localStorage.setItem("isLogged", stringifiedLogOut);
     setIsLogged(false);
     setUser({});
+    setToggleMenuDesktop(!toggleMenuDesktop);
   };
   return (
     <div className="DesktopMenu">

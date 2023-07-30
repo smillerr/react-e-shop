@@ -23,15 +23,17 @@ function ShoppingCart() {
     closeShoppingCart();
   };
   const handleCheckout = (payload) => {
-    const orderToAdd = {
-      products: payload,
-      date: new Date(),
-      totalOrder: calculateTotal(payload),
-    };
-    newOrderInList(orderToAdd);
-    newOrder(orderToAdd);
-    closeShoppingCart();
-    clearShoppingCart();
+    if (appState.cart.length !== 0) {
+      const orderToAdd = {
+        products: payload,
+        date: new Date(),
+        totalOrder: calculateTotal(payload),
+      };
+      newOrderInList(orderToAdd);
+      newOrder(orderToAdd);
+      closeShoppingCart();
+      clearShoppingCart();
+    }
   };
   return (
     <>
@@ -44,7 +46,10 @@ function ShoppingCart() {
             </div>
           </nav>
           <div className="shopping-cart-container">
-            <div className="shopping-cart-products-container" style={{paddingRight: '1rem'}}>
+            <div
+              className="shopping-cart-products-container"
+              style={{ paddingRight: "1rem" }}
+            >
               {/* Here goes our product of our shopping cart */}
               {appState.cart.map((product, index) => {
                 return (

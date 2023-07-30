@@ -4,16 +4,26 @@ import MyOrdersLink from "../components/MyOrdersLink";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import SignInButton from "../components/SignInButton";
-function MobileMenu({ isHome }) {
-  const { setIsLogged } = useContext(AppContext);
+import { Link } from "react-router-dom";
+function MobileMenu({ isHome, toggleMobileMenu, setToggleMobileMenu }) {
+  const { setIsLogged, user } = useContext(AppContext);
   const handleSignIn = () => {
     const stringifiedLogIn = JSON.stringify(true);
     localStorage.setItem("isLogged", stringifiedLogIn);
     setIsLogged(true);
   };
   const { isLogged } = useContext(AppContext);
+  const handleLogOut = () => {
+    const stringifiedNoUser = JSON.stringify({});
+    localStorage.setItem("user", stringifiedNoUser);
+    const stringifiedLogOut = JSON.stringify(false);
+    localStorage.setItem("isLogged", stringifiedLogOut);
+    setIsLogged(false);
+    setUser({});
+    setToggleMobileMenu(!toggleMobileMenu);
+  };
   return (
-    <div className="MobileMenu inactive">
+    <div className="MobileMenu ">
       {isHome && (
         <div className="MobileMenuList">
           <ul className="Categories">
@@ -32,10 +42,12 @@ function MobileMenu({ isHome }) {
       <div className="other-info-list">
         <ul className="primary-list">
           <MyOrdersLink>
-            <li className="categories-item">My orders</li>
+            <li className="categories-item" id="my-orders-link">
+              My orders
+            </li>
           </MyOrdersLink>
           <li className="categories-item">
-            <a href="/"> My account </a>
+            <Link to="/my-account"> My account </Link>
           </li>
         </ul>
       </div>
@@ -43,19 +55,18 @@ function MobileMenu({ isHome }) {
         <ul className="primary-list">
           {!isLogged ? (
             <>
-            <p> Yoooo what up </p>
-            <SignInButton handleSignIn={handleSignIn} />
+              <SignInButton handleSignIn={handleSignIn} />
             </>
           ) : (
             <>
               <li className="categories-item">
-                <a href="/"> example@somedomain.com </a>
+                <p> {user.email} </p>
               </li>
               <li className="categories-item">
-                <a href="/" id="sign-out">
+                <Link to="/" id="sign-out" onClick={handleLogOut}>
                   {" "}
                   Sign out{" "}
-                </a>
+                </Link>
               </li>
             </>
           )}

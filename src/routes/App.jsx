@@ -64,7 +64,7 @@ function App() {
                 userAccessAllowed ? (
                   <MyAccount />
                 ) : (
-                  <Navigate replace to={"/login"} />
+                  <Navigate replace to={"/sign-up"} />
                 )
               }
             />{" "}
@@ -74,7 +74,7 @@ function App() {
                 userAccessAllowed ? (
                   <MyOrders />
                 ) : (
-                  <Navigate replace to={"/login"} />
+                  <Navigate replace to={"/sign-up"} />
                 )
               }
             />
@@ -84,7 +84,7 @@ function App() {
                 userAccessAllowed ? (
                   <MyOrderContent />
                 ) : (
-                  <Navigate replace to={"/login"} />
+                  <Navigate replace to={"/sign-up"} />
                 )
               }
             />{" "}

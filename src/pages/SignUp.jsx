@@ -9,13 +9,12 @@ import {
 import React, { useState } from "react";
 import { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { SecondaryButton } from "@components/SecondaryButton";
 import { ShopLogo } from "@components/ShopLogo";
 import { AppContext } from "../context/AppContext";
 const SignUp = () => {
   const form = useRef(null);
   const router = useNavigate();
-  const { setUser } = useContext(AppContext);
+  const { setUser, setIsLogged } = useContext(AppContext);
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(form.current);
@@ -27,6 +26,9 @@ const SignUp = () => {
     setUser(data);
     const stringifiedUser = JSON.stringify(data);
     localStorage.setItem("user", stringifiedUser);
+    const stringifiedLogIn = JSON.stringify(true);
+    localStorage.setItem("isLogged", stringifiedLogIn);
+    setIsLogged(true);
     router("/");
   };
   const [modalVisibility, setModalVisibility] = useState(true);

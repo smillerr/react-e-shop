@@ -1,9 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import '@styles/SignInButton.scss'
-const SingInButton = ({handleSignIn}) => {
+import "@styles/SignInButton.scss";
+const SingInButton = ({ invisible, handleSignIn }) => {
   return (
-    <Link to={"/login"} className="mobile-invisible" onClick={handleSignIn}>
+    <Link
+      to={"/login"}
+      onClick={handleSignIn}
+      className={invisible ? `mobile-invisible` : ``}
+    >
       <button
         type="text"
         style={{
@@ -13,6 +17,7 @@ const SingInButton = ({handleSignIn}) => {
           border: "none",
           height: "3rem",
           width: "100%",
+          textAlign: "start",
         }}
       >
         {" "}
