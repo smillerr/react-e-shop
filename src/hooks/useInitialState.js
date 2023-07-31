@@ -30,6 +30,17 @@ const initalLoginStatusLS = () => {
   }
   return parsedLogged;
 };
+const initialOrdersLS = () =>{
+  const hasOrders = localStorage.getItem("orders")
+  let parsedOrders;
+  if(!hasOrders) {
+    localStorage.setItem("orders", JSON.stringify([]))
+    parsedOrders = []
+  } else {
+    parsedOrders = JSON.parse(hasOrders);
+  }
+  return parsedOrders
+}
 //Custom hook to handle our inital state
 function useInitialState() {
   //Initial state of the app
@@ -38,7 +49,8 @@ function useInitialState() {
   const [filteredUrl, setFilteredUrl] = useState(
     `https://api.escuelajs.co/api/v1/products`
   );
-  const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState(initialOrdersLS);
+  
   const [user, setUser] = useState(initialUserLS);
   const [isLogged, setIsLogged] = useState(initalLoginStatusLS);
   const addProductToCart = (payload) => {
