@@ -4,6 +4,7 @@ import "@styles/ProductDetailAside.scss";
 import addToCart from "@images/bt_add_to_cart.svg";
 import addedToCart from "@images/bt_added_to_cart.svg";
 import { AppContext } from "../context/AppContext";
+import { errorOnImage } from "../utils/errorOnImage";
 function ProductDetailAside() {
   const { appState, addProductToCart, productToShow, closeAside } =
     useContext(AppContext);
@@ -26,6 +27,7 @@ function ProductDetailAside() {
             className="ProductInfoImage"
             src={productToShow.images[0]}
             alt="Selected product image"
+            onError={(e) => errorOnImage(e)}
           />
           <div className="ProductInfo">
             <p> {`$${ceiledPrice}`} </p>

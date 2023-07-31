@@ -28,6 +28,8 @@
     cursor: pointer;
 }
 .nav-bar-shopping-cart p{
+    font-family: "Quicksand", sans-serif;
+
     color: var(--black);
     font-size: var(--large);
     font-weight: bold;
@@ -37,6 +39,7 @@
     padding: 1rem;
 }
 .shopping-cart-info{
+    
     background-color: var(--text-input-field);
     border-radius: 1.2rem;
     padding: 1.2rem;
@@ -46,12 +49,16 @@
     height: 5rem;
 }
 .shopping-cart-info p:nth-child(1){
+    font-family: "Quicksand", sans-serif;
+
     display: flex;
     align-items: center;
     font-size: var(--small);
     font-weight: bold;            
 }
 .shopping-cart-info p:nth-child(2){
+    font-family: "Quicksand", sans-serif;
+
     display: flex;
     align-items: center; 
     font-size: var(--small);

@@ -1,10 +1,13 @@
-import { useContext } from "react";
+import React from "react";
+import { useContext, useEffect, useState } from "react";
+
 import { AppContext } from "../context/AppContext";
 import { ShoppingCartItem } from "@components/ShoppingCartItem";
 import calculateTotal from "../utils/calculateTotal";
 import "@styles/ShoppingCart.scss";
 import flechita from "@images/flechita.svg";
 import { useNavigate } from "react-router-dom";
+import getOrderIndex from "../utils/getOrderIndex";
 
 function ShoppingCart() {
   const {
@@ -12,10 +15,13 @@ function ShoppingCart() {
     removeProductFromCart,
     clearShoppingCart,
     closeShoppingCart,
+    orders,
     newOrder,
     newOrderInList,
   } = useContext(AppContext);
-  const router = useNavigate();
+  const navigate = useNavigate();
+  const [shouldRedirect, setShouldRedirect] = useState(false)
+  const [lastOrder, setLastOrder] = useState({})
   const handleRemove = (item) => {
     removeProductFromCart(item);
   };
@@ -31,11 +37,24 @@ function ShoppingCart() {
       };
       newOrderInList(orderToAdd);
       newOrder(orderToAdd);
+      setShouldRedirect(true)
+      setLastOrder(orderToAdd);
       closeShoppingCart();
       clearShoppingCart();
-      router("/my-orders");
     }
+
   };
+  useEffect(() => {
+    if (shouldRedirect) {
+      const currentOrder = getOrderIndex(orders, lastOrder);
+      navigate(`/my-orders/${currentOrder}`);
+    }
+    return () => {
+      setLastOrder({})
+      setShouldRedirect(false)
+    }
+  }, [orders])
+
   return (
     <>
       {appState.isCartOpen ? (
@@ -77,7 +96,9 @@ function ShoppingCart() {
             <button
               type="button"
               className="primary-button checkout-button"
-              onClick={() => handleCheckout(appState.cart)}
+              onClick={() => {
+                handleCheckout(appState.cart)
+              }}
             >
               {" "}
               Checkout{" "}
