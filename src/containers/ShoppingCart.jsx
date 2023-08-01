@@ -36,6 +36,7 @@ function ShoppingCart() {
         products: payload,
         date: currentDate(),
         totalOrder: calculateTotal(payload),
+        orderId: `${payload[0].id}${payload[0].images[0]}`
       };
       newOrderInList(orderToAdd);
       newOrder(orderToAdd);
@@ -46,16 +47,19 @@ function ShoppingCart() {
     }
   };
   useEffect(() => {
+    let currentOrder;
     if (shouldRedirect) {
       if (Object.keys(user).length !== 0) {
         localStorage.setItem("orders", JSON.stringify(orders));
       }
-      const currentOrder = getOrderIndex(orders, lastOrder);
+      currentOrder = getOrderIndex(orders, lastOrder);
+      console.log('The current order that you will be redirected to is', currentOrder);
       navigate(`/my-orders/${currentOrder}`);
     }
     return () => {
       setLastOrder({})
       setShouldRedirect(false)
+      currentOrder = {}
     }
   }, [orders])
 
