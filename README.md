@@ -27,7 +27,7 @@ $ npm run start
 Now, go to [localHost](localhost:3006) and it should look like this: 
 
 ![Project preview on desktop devices](e-commerce-preview.png)
-![Project preview on mobile devices]
+[Project preview on mobile devices](e-commerce-mobile-preview.png)
 
 ## Contact and feedback
 Given the case you are interested in asking something about the project you can contact me through email at smillerr33@gmail.com or via [Linkedin](https://www.linkedin.com/in/juan-miller-469863265/), also know that if you have some kind of feedback is also welcome. If none of the above are your case and maybe you find some issue or bug you can open an Issue and it will be fixed as soon as possible or if you want to contribuite somehow to the project feel free to open a new PR
