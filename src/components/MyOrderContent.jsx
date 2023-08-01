@@ -17,7 +17,9 @@ const MyOrderContent = () => {
           display: "flex",
           flexDirection: "column"
         }}>
-          <div className="order-header" style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="order-header" style={{
+            display: 'flex', alignItems: 'center', fontFamily: 'Quicksand, sans-serif'
+          }}>
             <Link style={{ marginRight: '3rem' }} to={"/my-orders"}>
               <figure>
                 <img alt="Go back arrow" src={flechita} style={{ transform: 'rotate(180deg)', }} />

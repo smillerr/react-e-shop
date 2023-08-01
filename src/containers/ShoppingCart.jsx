@@ -8,6 +8,7 @@ import "@styles/ShoppingCart.scss";
 import flechita from "@images/flechita.svg";
 import { useNavigate } from "react-router-dom";
 import getOrderIndex from "../utils/getOrderIndex";
+import { currentDate } from "../utils/getTodayDate";
 
 function ShoppingCart() {
   const {
@@ -15,6 +16,7 @@ function ShoppingCart() {
     removeProductFromCart,
     clearShoppingCart,
     closeShoppingCart,
+    user,
     orders,
     newOrder,
     newOrderInList,
@@ -32,7 +34,7 @@ function ShoppingCart() {
     if (appState.cart.length !== 0) {
       const orderToAdd = {
         products: payload,
-        date: new Date(),
+        date: currentDate(),
         totalOrder: calculateTotal(payload),
       };
       newOrderInList(orderToAdd);
@@ -42,10 +44,12 @@ function ShoppingCart() {
       closeShoppingCart();
       clearShoppingCart();
     }
-
   };
   useEffect(() => {
     if (shouldRedirect) {
+      if (Object.keys(user).length !== 0) {
+        localStorage.setItem("orders", JSON.stringify(orders));
+      }
       const currentOrder = getOrderIndex(orders, lastOrder);
       navigate(`/my-orders/${currentOrder}`);
     }

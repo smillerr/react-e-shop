@@ -7,7 +7,7 @@ import { AppContext } from "../context/AppContext";
 import { NavBar } from "../components/NavBar";
 const MyOrders = () => {
   const { orders } = useContext(AppContext);
-  console.log('Created orders' , orders);
+  console.log('Created orders', orders);
   return (
     <>
       <NavBar />

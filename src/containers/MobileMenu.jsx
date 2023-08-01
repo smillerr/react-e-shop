@@ -6,7 +6,7 @@ import { AppContext } from "../context/AppContext";
 import SignInButton from "../components/SignInButton";
 import { Link } from "react-router-dom";
 function MobileMenu({ isHome, toggleMenuMobile, setToggleMenuMobile }) {
-  const { setIsLogged, user, setUser } = useContext(AppContext);
+  const { setIsLogged, user, setUser, setOrders, orders } = useContext(AppContext);
   const handleSignIn = () => {
     const stringifiedLogIn = JSON.stringify(true);
     localStorage.setItem("isLogged", stringifiedLogIn);
@@ -18,10 +18,14 @@ function MobileMenu({ isHome, toggleMenuMobile, setToggleMenuMobile }) {
     localStorage.setItem("user", stringifiedNoUser);
     const stringifiedLogOut = JSON.stringify(false);
     localStorage.setItem("isLogged", stringifiedLogOut);
+    const stringifiedNoOrders = JSON.stringify([])
+    localStorage.setItem("orders", stringifiedNoOrders)
     setIsLogged(false);
     setUser({});
+    setOrders([])
     setToggleMenuMobile(!toggleMenuMobile);
   };
+  console.log('User orders: ', orders);
   return (
     <div className="MobileMenu ">
       {isHome && (

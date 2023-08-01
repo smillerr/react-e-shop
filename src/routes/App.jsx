@@ -31,8 +31,8 @@ function App() {
   const routesVisibility = () => {
     if (
       appInitialState.isLogged &&
-      appInitialState.user !== {} &&
-      localStorage.getItem("user") !== {} &&
+      Object.keys(appInitialState.user).length !== 0 &&
+      Object.keys(localStorage.getItem("user")).length !== 0 &&
       localStorage.getItem("isLogged")
     ) {
       return true;

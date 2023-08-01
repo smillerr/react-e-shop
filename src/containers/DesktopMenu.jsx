@@ -4,13 +4,16 @@ import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { Link } from "react-router-dom";
 function DesktopMenu({ toggleMenuDesktop, setToggleMenuDesktop }) {
-  const { setIsLogged, setUser } = useContext(AppContext);
+  const { setIsLogged, setUser, setOrders } = useContext(AppContext);
   const handleLogOut = () => {
     const stringifiedNoUser = JSON.stringify({});
     localStorage.setItem("user", stringifiedNoUser);
     const stringifiedLogOut = JSON.stringify(false);
     localStorage.setItem("isLogged", stringifiedLogOut);
+    const stringifiedNoOrders = JSON.stringify([])
+    localStorage.setItem("orders", stringifiedNoOrders)
     setIsLogged(false);
+    setOrders([])
     setUser({});
     setToggleMenuDesktop(!toggleMenuDesktop);
   };
